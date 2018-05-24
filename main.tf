@@ -8,7 +8,7 @@ data "template_file" "install" {
 data "template_file" "configure" {
   template = "${file("${path.module}/templates/configure.tpl")}"
   vars {
-    cluster_name = "${var.project_name}"
+    cluster_name = "${var.cassandra_cluster_name}"
     seeds = "${local.seeds}"
   }
 }

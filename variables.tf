@@ -8,6 +8,12 @@ variable "project_name" {
   default = "cassandra"
 }
 
+variable "cassandra_cluster_name" {
+  description = "cassandra cluster name"
+  default = "cassandra"
+}
+
+
 variable "cassandra_version" {
   description = "cassandra version"
   default = "311x"
