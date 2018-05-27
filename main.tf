@@ -39,6 +39,7 @@ resource "google_compute_instance" "default" {
   name         = "${var.project_name}-${count.index}"
   machine_type = "${var.machine_type}"
   zone         = "${data.google_compute_zones.available.names[count.index]}"
+  allow_stopping_for_update = true
 
   tags = "${var.tags}"
 
