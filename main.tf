@@ -10,7 +10,7 @@ data "template_file" "configure" {
 
   vars {
     cluster_name = "${var.cassandra_cluster_name}"
-    seeds = "${local.seeds}"
+    seeds = "${var.bootstrap == true ? local.seeds_add : local.seeds_new }"
   }
 }
 
@@ -22,7 +22,8 @@ data "google_compute_zones" "available" {}
 
 locals {
   count = "${length(data.google_compute_zones.available.names)}"
-  seeds = "${join("," , concat( slice(google_compute_instance.default.*.network_interface.0.address,0,2),var.add_seeds))}"
+  seeds_new = "${join("," , concat( slice(google_compute_instance.default.*.network_interface.0.address,0,2),var.add_seeds))}"
+  seeds_add = "${join("," , var.add_seeds)}"
 }
 
 resource "google_compute_disk" "default" {
