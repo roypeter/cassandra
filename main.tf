@@ -6,11 +6,11 @@ data "template_file" "install" {
 }
 
 data "template_file" "configure" {
-  template = "${var.bootstrap == true ? file("${path.module}/templates/configure-add.tpl") :  file("${path.module}/templates/configure-new.tpl")  }"
+  template = "${var.bootstrap == "true" ? file("${path.module}/templates/configure-add.tpl") :  file("${path.module}/templates/configure-new.tpl")  }"
 
   vars {
     cluster_name = "${var.cassandra_cluster_name}"
-    seeds = "${var.bootstrap == true ? local.seeds_add : local.seeds_new }"
+    seeds = "${var.bootstrap == "true" ? local.seeds_add : local.seeds_new }"
   }
 }
 
